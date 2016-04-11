@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  get 'auth/developer', :as => 'developer_auth'
+  get 'auth/twitter', :as => 'twitter_auth'
 
   match 'auth/:provider/callback' => 'sessions#create', :via => [:get, :post]
   # You can have the root of your site routed with "root"
