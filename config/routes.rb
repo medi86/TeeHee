@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'auth/twitter', :as => 'twitter_auth'
 
-  match 'auth/:provider/callback' => 'sessions#create', :via => [:get, :post]
+  match 'auth/:provider/callback' => 'sessions#new', :via => [:get, :post]
   # You can have the root of your site routed with "root"
   root 'sessions#new'
 
