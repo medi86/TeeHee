@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get 'auth/twitter', :as => 'twitter_auth'
 
+  match 'auth/:provider/callback' => 'sessions#create', :via => [:get, :post]
   # You can have the root of your site routed with "root"
   root 'sessions#new'
 
@@ -11,7 +13,7 @@ Rails.application.routes.draw do
      post 'sessions/new' => 'sessions#create'
      delete 'sessions' => 'sessions#destroy'
      get 'users/show' => 'users#show'
-
+     # get '/auth/:provider/callback' => 'sessions#create'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
