@@ -5,8 +5,6 @@ class SessionsController < ApplicationController
 
   # a;lsdkfja;lsdjf;asdj;
   def create
-    require 'pry'
-    binding.pry
   end
 
   def destroy
