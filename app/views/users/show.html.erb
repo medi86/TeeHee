@@ -1,5 +1,6 @@
+<li><%= link_to 'Log Out', :logout, method: :delete %></li>
+
 <h1><%= current_user.name + "'s" %> Tweets</h1>
-<p>Find me in app/views/users/show.html.erb</p>
 
 <% @user_tweets[0..10].each do |tweet| %>
   <li><%= tweet.text %></li>

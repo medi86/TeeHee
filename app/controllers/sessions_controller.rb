@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
 
-    redirect_to :root
+    redirect_to sessions_new_path
   end
 
   private
