@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411214926) do
+ActiveRecord::Schema.define(version: 20160412144913) do
 
   create_table "users", force: :cascade do |t|
     t.string   "uid"
     t.string   "provider"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "twitter_key"
+    t.string   "twitter_secret"
   end
 
 end

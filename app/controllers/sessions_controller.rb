@@ -1,45 +1,27 @@
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
 
-  # config = {
-  #   consumer_key: Rails.application.secrets.twitter_consumer_key,
-  #   consumer_secret: Rails.application.secrets.twitter_consumer_secret
-  # }
-
-  # client = Twitter::REST::Client.new(config)
-
   def new
-    config = {
-      consumer_key: Rails.application.secrets.twitter_consumer_key,
-      consumer_secret: Rails.application.secrets.twitter_consumer_secret
-    }
-
-    @client = Twitter::REST::Client.new(config)
-
-    def @client.get_all_tweets(user)
-      collect_with_max_id do |max_id|
-        options = {count: 200, include_rts: true}
-        options[:max_id] = max_id unless max_id.nil?
-        user_timeline(user, options)
-      end
-    end
-
   end
 
   def create
+    user = User.find_or_create_by(provider: auth_hash[:provider], uid: auth_hash[:uid])
+    user.update_attributes(name: auth_hash[:info][:name], twitter_key: auth_hash[:credentials][:token], twitter_secret: auth_hash[:credentials][:secret])
+
+    session[:uid] = user.id
+
+    redirect_to sessions_new_path
   end
 
   def destroy
+    reset_session
+
+    redirect_to :root
   end
+
+  private
 
   def auth_hash
     request.env['omniauth.auth']
   end
-
-  def collect_with_max_id(collection=[], max_id=nil, &block)
-    response = yield(max_id)
-    collection += response
-    response.empty? ? collection.flatten : collect_with_max_id(collection, response.last.id - 1, &block)
-  end
-
 end

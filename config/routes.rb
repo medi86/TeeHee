@@ -3,14 +3,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   get 'auth/twitter', :as => 'twitter_auth'
 
-  match 'auth/:provider/callback' => 'sessions#new', :via => [:get, :post]
+  match 'auth/:provider/callback' => 'sessions#create', :via => [:get, :post]
   # You can have the root of your site routed with "root"
-  root 'sessions#create'
+  root 'sessions#new'
 
   # Example of regular route:
      get 'sessions/new' => 'sessions#new'
      post 'sessions/new' => 'sessions#create'
-     delete 'sessions' => 'sessions#destroy'
+     delete 'sessions' => 'sessions#destroy', :as => 'logout'
      get 'users/show' => 'users#show'
      # get '/auth/:provider/callback' => 'sessions#create'
   # Example of named route that can be invoked with purchase_url(id: product.id)
